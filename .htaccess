@@ -1,0 +1,10 @@
+Options -Indexes
+RewriteEngine on
+IndexIgnore */*
+
+RewriteBase /
+
+RewriteCond %{REQUEST_URI} !^/web/
+RewriteRule ^(.*)$ /web/$1 [QSA,L]
+
+                          
