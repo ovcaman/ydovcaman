@@ -8,15 +8,19 @@ if ($_SERVER['SERVER_NAME'] == 'youtube-dl.yii') {
 
 if (substr($_SERVER['SERVER_NAME'], -19) == 'online-converter.us') {
   defined('LANGUAGE') or define('LANGUAGE', 'en');
+  defined('IS_FINAL_DOMAIN') or define('IS_FINAL_DOMAIN', true);
 }
 elseif (substr($_SERVER['SERVER_NAME'], -3) == '.us') {
   defined('LANGUAGE') or define('LANGUAGE', 'en');
+  defined('IS_FINAL_DOMAIN') or define('IS_FINAL_DOMAIN', false);
 }
 elseif (substr($_SERVER['SERVER_NAME'], -3) == '.cz') {
   defined('LANGUAGE') or define('LANGUAGE', 'cz');
+  defined('IS_FINAL_DOMAIN') or define('IS_FINAL_DOMAIN', false);
 }
 else {
   defined('LANGUAGE') or define('LANGUAGE', 'sk');
+  defined('IS_FINAL_DOMAIN') or define('IS_FINAL_DOMAIN', false);
 }
 
 require(__DIR__ . '/../vendor/autoload.php');

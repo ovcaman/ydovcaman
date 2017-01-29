@@ -104,7 +104,7 @@ setTimeout(liked, 1000);
 
 
 <div id="top">
-    <a href="/"><h1><?= LANGUAGE == "sk" || LANGUAGE == "cz" ? "YouTube-Download." . LANGUAGE : (LANGUAGE == eu ? 'YouTube-Download.us' : 'Online-Converter.us')  ?></h1></a>
+    <a href="/"><h1><?= LANGUAGE == "sk" || LANGUAGE == "cz" ? "YouTube-Download." . LANGUAGE : (!IS_FINAL_DOMAIN ? 'YouTube-Download.us' : 'Online-Converter.us')  ?></h1></a>
     <div class="fb-like" id="like" style="position:relative;bottom:7px;border:" data-href="https://www.facebook.com/youtube.download.sk" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
     <div id="lang">
         <a href="http://www.youtube-download.sk<?= $_SERVER['REQUEST_URI']?>" class="<?= LANGUAGE == 'sk' ? 'activeLang' : ''?>" hreflang="sk">SK</a> | 
