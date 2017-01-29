@@ -6,10 +6,13 @@ if ($_SERVER['SERVER_NAME'] == 'youtube-dl.yii') {
   defined('YII_ENV') or define('YII_ENV', 'dev');
 }
 
-if ($_SERVER['SERVER_NAME'] == 'www.youtube-download.us') {
+if (substr($_SERVER['SERVER_NAME'], -19) == 'online-converter.us') {
   defined('LANGUAGE') or define('LANGUAGE', 'en');
 }
-elseif ($_SERVER['SERVER_NAME'] == 'www.youtube-download.cz') {
+elseif (substr($_SERVER['SERVER_NAME'], -3) == '.us') {
+  defined('LANGUAGE') or define('LANGUAGE', 'en');
+}
+elseif (substr($_SERVER['SERVER_NAME'], -3) == '.cz') {
   defined('LANGUAGE') or define('LANGUAGE', 'cz');
 }
 else {
