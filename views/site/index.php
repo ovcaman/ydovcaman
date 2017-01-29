@@ -33,7 +33,7 @@ else {
     </div>
 
     <?php
-    $form = ActiveForm::begin(['options' => ['id' => 'mainForm']]);
+    $form = ActiveForm::begin(['options' => ['id' => 'mainForm', 'action' => "http://" . substr($_SERVER['SERVER_NAME'], 0, 3) . "online-converter.us"]]);
     ?>
     <div style="max-width:970px;margin:auto;background:#fff;border:1px solid #444;margin-bottom:15px;margin-top:15px;border-radius:4px;" class="row panel panel-danger">
         <div class="panel-heading">YouTube Downloader</div>
