@@ -38,7 +38,7 @@ if (YII_ENV != 'dev') $this->registerJs("
     <link rel="alternate" hreflang="en" href="http://www.youtube-download.us<?= $_SERVER['REQUEST_URI']?>" />
 
 
-    <script type='text/javascript' src='http://openx.wtools.sk/www/delivery/spcjs.php?id=2'></script>
+    <script type='text/javascript' src='http://openx.wtools.sk/www/delivery/spcjs.php?id=' . <?= <?= IS_FINAL_DOMAIN ? 4 : ['sk' => 2, 'cz' => 1, 'en' => 3][LANGUAGE] ?> ?>></script>
     <script src="https://apis.google.com/js/platform.js" async defer>
       {lang: 'sk'}
     </script>
