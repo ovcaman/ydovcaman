@@ -60,9 +60,24 @@ $_SERVER['lang'] = [
         "en" => '<h2>How to download video from youtube.com? </h2><p>The fastest way to download video from youtube.com is <strong> replacing "youtube.com" with "youtube-x.com" in the URL </strong>. <br />The result URL should look like this: <br /><br /><strong>http://www.youtube<span style = "color:#dd4400">-x</span>.com/watch?v=xxxxxxx</strong></p><h2> What is youtube-download.sk? </h2><p><strong> YouTube-Download.sk </strong> is a service to <strong> download videos from YouTube.com </strong>. <br />Just paste URL of the video on youtube, click <strong> Download </strong> and <br />select one of the resolutions that <strong> downloader </strong> offers. <br />Video is downloaded in the <strong> MP4 </strong> format.</p>',
     ],
     "video_help" => [
-        "sk" => "",
-        "cz" => "",
-        "en" => "",
+        "sk" => "<h2>Download &quot;{title}&quot;</h2>
+      <p>Stiahnite si video <strong>&quot;{title}&quot;</strong> priamo z youtube. Stačí zvoliť požadovaný formát a po kliknutí na tlačidlo &quot;Download&quot; bude vygenerovaný odkaz na stiahnutie videa <strong>&quot;{title}&quot;</strong>.</p>
+      <h2>Chcete stiahnúť len zvuk z videa vo formáte mp3?</h3>
+      <p>
+          Pre stiahnutie zvuku z videa <strong>&quot;{title}&quot;</strong> vo formáte MP3 jednoducho zvoľte formát MP3 a počkajte, kým sa vygeneruje odkaz. 
+      </p>",
+        "cz" => "<h2>Download &quot;{title}&quot;</h2>
+      <p>Download video <strong>&quot;{title}&quot;</strong> directly from youtube. Just chose the format and click on the button &quot;Download&quot;. After few moments will be generated link to download video and you can start downloading.</p>
+      <h2>Do you want to download just audio in MP3 format?</h3>
+      <p>
+          To download just audio of <strong>&quot;{title}&quot;</strong> in MP3 format just chose MP3 format and wait until the link wil be generated. 
+      </p>",
+        "en" => "<h2>Download &quot;{title}&quot;</h2>
+      <p>Download video <strong>&quot;{title}&quot;</strong> directly from youtube. Just chose the format and click on the button &quot;Download&quot;. After few moments will be generated link to download video and you can start downloading.</p>
+      <h2>Do you want to download just audio in MP3 format?</h3>
+      <p>
+          To download just audio of <strong>&quot;{title}&quot;</strong> in MP3 format just chose MP3 format and wait until the link wil be generated. 
+      </p>",
     ],
     "download" => [
         "sk" => "Stiahnúť",

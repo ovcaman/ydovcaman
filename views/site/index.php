@@ -147,12 +147,7 @@ function onYouTubePlayerAPIReady() {
 ?>
 
   <div style="max-width:970px;margin:auto;">
-      <h2>Download &quot;<?= $video->title ?>&quot;</h2>
-      <p>Stiahnite si video <strong>&quot;<?= $video->title ?>&quot;</strong> priamo z youtube. Stačí zvoliť požadovaný formát a po kliknutí na tlačidlo "Download" bude vygenerovaný odkaz na stiahnutie videa <strong>&quot;<?= $video->title ?>&quot;</strong>.</p>
-      <h2>Chcete stiahnúť len zvuk z videa vo formáte mp3?</h3>
-      <p>
-          Pre stiahnutie zvuku z videa <strong>&quot;<?= $video->title ?>&quot;</strong> vo formáte MP3 jednoducho zvoľte formát MP3 a počkajte, kým sa vygeneruje odkaz. 
-      </p>
+      <?= str_replace("{title}", $video->title, $lang['landing_help'][LANGUAGE]) ?>
   </div>
   <div style="width:300px;position:relative;margin:25px auto 0 auto;border:10px solid #ffffff;border-radius:5px;box-shadow:0 0 5px #aaa;" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">
       <meta itemprop="thumbnailURL" content="http://i.ytimg.com/vi/<?= $video->id ?>/mqdefault.jpg" />
