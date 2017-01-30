@@ -16,56 +16,66 @@ else {
 }
 ?>
 <div id="url_form">
-    <?php if ($video->title) {?>
-    <h2><?= $video->title ?></h2>
-    <br />
-    <div class="video-container">
-      <div id="ytplayer"></div> 
-    </div>
-    <div class="clearfix"></div>
-    <br />                
-    <?php } ?>
-
-    <div style="max-width:970px;margin:auto;">
-        <script type='text/javascript'><!--// <![CDATA[
-            OA_show(<?= ['sk' => 3, 'cz' => 1, 'en' => 6][LANGUAGE] ?>);
-        // ]]> -->
-        </script>
-    </div>
-
-    <?php
-    $form = ActiveForm::begin(['id' => 'mainForm', 'action' => "http://" . substr($_SERVER['SERVER_NAME'], 0, 4) . "online-converter.us/"]);
-    ?>
-    <div style="max-width:970px;margin:auto;background:#fff;border:1px solid #444;margin-bottom:15px;margin-top:15px;border-radius:4px;" class="row panel panel-danger">
-        <div class="panel-heading">YouTube Downloader</div>
-        <div class="panel-body">
-            <div class="col-md-7 col-sm-7 col-xs-12">
-                <?= $form->field($download, 'url', ['template' => '{label}{input}{error}'])->textInput(['placeholder' => 'https://www.youtube.com/watch?v=8H7FnfnSEMA'])->label('URL:'); ?>
-            </div>
-            <div class="col-md-3 col-sm-3 col-xs-7">
-                <?= $form->field($download, 'format', ['template' => '{label}{input}{error}'])->dropDownList(['mp3' => 'mp3 (audio)', 'mp4' => 'mp4 (audio + video)'], ['prompt' => ''])->label("Format:") ?>
-            </div>
-            <div class="col-md-2 col-sm-2 col-xs-5">
-                <div class="form-group">
-                    <label class="control-label">&nbsp;</label>
-                    <?= Html::submitButton('Download', ['class' => 'btn btn-danger form-control', 'disabled']); ?>
-                </div>
-            </div>
-            <?php if ($filename) {?>
-                <a href="/tmp/<?= $filename ?>" class="btn btn-success btn-lg" style="width:100%;"><i class="glyphicon glyphicon-save"></i> Download: <?= $filename ?></a>
-            <?php }?>
+  <div style="max-width:1200px;margin:auto;" class="row">
+    <div class="col-md-8">
+        <?php if ($video->title) {?>
+        <h2><?= $video->title ?></h2>
+        <br />
+        <div class="video-container">
+          <div id="ytplayer"></div>
+          <div class="clearfix"></div>
         </div>
-    </div>
-    <?php
-    ActiveForm::end();
-    ?>
-    <div style="max-width:970px;margin:auto;">
+        <br />                
+        <?php } ?>
         <script type='text/javascript'><!--// <![CDATA[
-            OA_show(<?= ['sk' => 3, 'cz' => 7, 'en' => 6][LANGUAGE] ?>);
+            OA_show(<?= IS_FINAL_DOMAIN ? 8 : ['sk' => 3, 'cz' => 1, 'en' => 6][LANGUAGE] ?>);
         // ]]> -->
         </script>
+
+        <?php
+        $form = ActiveForm::begin(['id' => 'mainForm', 'action' => "http://" . substr($_SERVER['SERVER_NAME'], 0, 4) . "online-converter.us/"]);
+        ?>
+        <div style="background:#fff;border:1px solid #444;margin-bottom:15px;margin-top:15px;border-radius:4px;" class="row panel panel-danger">
+            <div class="panel-heading">YouTube Downloader</div>
+            <div class="panel-body">
+                <div class="col-md-7 col-sm-7 col-xs-12">
+                    <?= $form->field($download, 'url', ['template' => '{label}{input}{error}'])->textInput(['placeholder' => 'https://www.youtube.com/watch?v=8H7FnfnSEMA'])->label('URL:'); ?>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-7">
+                    <?= $form->field($download, 'format', ['template' => '{label}{input}{error}'])->dropDownList(['mp3' => 'mp3 (audio)', 'mp4' => 'mp4 (audio + video)'], ['prompt' => ''])->label("Format:") ?>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-5">
+                    <div class="form-group">
+                        <label class="control-label">&nbsp;</label>
+                        <?= Html::submitButton('Download', ['class' => 'btn btn-danger form-control', 'disabled']); ?>
+                    </div>
+                </div>
+                <?php if ($filename) {?>
+                    <a href="/tmp/<?= $filename ?>" class="btn btn-success btn-lg" style="width:100%;"><i class="glyphicon glyphicon-save"></i> Download: <?= $filename ?></a>
+                <?php }?>
+
+                <script type='text/javascript'><!--// <![CDATA[
+                    OA_show(<?= IS_FINAL_DOMAIN ? 9 : ['sk' => 5, 'cz' => 4, 'en' => 6][LANGUAGE] ?>);
+                // ]]> -->
+                </script>
+            </div>
+        </div>
+        <?php
+        ActiveForm::end();
+        ?>
+        <script type='text/javascript'><!--// <![CDATA[
+            OA_show(<?= IS_FINAL_DOMAIN ? 8 : ['sk' => 5, 'cz' => 7, 'en' => 6][LANGUAGE] ?>);
+        // ]]> -->
+        </script>
+        <br />
     </div>
-    <br />
+    <div class="col-md-4">
+          <script type='text/javascript'><!--// <![CDATA[
+              OA_show(<?= IS_FINAL_DOMAIN ? 10 : ['sk' => 12, 'cz' => 11, 'en' => 13][LANGUAGE] ?>);
+          // ]]> -->
+          </script>
+    </div>
+  </div>
 </div>
 <br />
 <?php
