@@ -134,6 +134,7 @@ $config = [
             'baseUrl' => '/',
             'scriptUrl' => '/',     
             'rules' => [
+                'sitemap.xml' => 'site/sitemap-xml',
                 '<action:[a-zA-Z0-9_-]+>/?' => 'site/<action>',
                 'download' => 'site/download',
                 'v/<v:[a-zA-Z0-9_-]+>/?' => 'site/index',

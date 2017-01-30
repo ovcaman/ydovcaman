@@ -142,8 +142,24 @@ class SiteController extends Controller
 
     public function actionSitemap()
     {
-        $videos = Video::find()->select('video.*, COUNT(*) AS `download_count`')->from('`video` LEFT JOIN `download` ON `video`.`id` = `video_id`')->where(['language' => LANGUAGE])->groupBy('`video`.`id`')->orderBy('`download_count` DESC')->all();
+        $videos = Video::find()->select('video.*, COUNT(*) AS `download_count`')->from('`video` LEFT JOIN `download` ON `video`.`id` = `video_id`')->where(['language' => LANGUAGE])->groupBy('`video`.`id`')->orderBy('`download_count` DESC')->limit(15000)->all();
         return $this->render('sitemap', ['videos' => $videos]);
+    }
+
+    public function actionSitemapXml($page = null)
+    {   
+        Yii::$app->response->headers->add('Content-Type', 'text/xml; charset=utf-8');
+        Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+        $per_page = 10000;
+        $offset = 0;
+        $videos = [];
+        if ($page != null) {
+            $videos = Video::find()->select('video.*, COUNT(*) AS `download_count`')->from('`video` LEFT JOIN `download` ON `video`.`id` = `video_id`')->where(['language' => LANGUAGE])->groupBy('`video`.`id`')->orderBy('`download_count` DESC')->limit($per_page)->offset(($page - 1) * $per_page)->all();
+        }
+        $total = Video::find()->where(['language' => LANGUAGE])->count();
+        $pages = ceil($total / $per_page);
+        echo trim($this->renderPartial('sitemapXml', ['videos' => $videos, 'pages' => $pages, 'page' => $page]));
+        return "";
     }
 
     public function actionStahovanieZYoutube()
