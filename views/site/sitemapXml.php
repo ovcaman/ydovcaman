@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?php 
+<?php echo '<?xml version="1.0" encoding="UTF-8"?>'; 
 $date = date('c', strtotime(date("Y-m-d H:00:00")));
 if ($page == null) { 
 echo '<sitemapindex xmlns="http://www.google.com/schemas/sitemap/0.84">';
