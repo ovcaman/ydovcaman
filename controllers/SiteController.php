@@ -68,6 +68,11 @@ class SiteController extends Controller
         $error = "";
         $more = [];
         $filename = null;
+        $lang = LANGUAGE;
+        if (isset($_POST['language']))
+        {
+            $lang = $_POST['language'];
+        }
 
         if ($setlang != null)
         {
@@ -79,7 +84,7 @@ class SiteController extends Controller
             if (substr($_SERVER['REQUEST_URI'], 0, 3) != "/v/") {
                 return $this->redirect( "/v/{$v}/?format=" . $format);
             }
-            $data = Video::find()->where(['id' => $v, 'language' => LANGUAGE])->one();
+            $data = Video::find()->where(['id' => $v, 'language' => $lang])->one();
             $download->url = "https://www.youtube.com/watch?v=".$v;
             if (!$data) {
                 $data = $video->loadInfo($v);
@@ -114,10 +119,13 @@ class SiteController extends Controller
                 }
             }
 
-            $data = Video::find()->where(['id' => $id, 'language' => LANGUAGE])->one();
+            $data = Video::find()->where(['id' => $id, 'language' => $lang])->one();
             if (!$data) {
                 $video = new Video();
                 $data = $video->loadInfo($id);
+            }
+            if ($data) {
+                $video = $data;
             }
 
             $download->format = $_POST['Download']['format'];
