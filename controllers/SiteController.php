@@ -115,7 +115,7 @@ class SiteController extends Controller
             }
 
             $data = Video::find()->where(['id' => $id, 'language' => LANGUAGE])->one();
-            if ($data == NULL) {
+            if (!$data) {
                 $video = new Video();
                 $data = $video->loadInfo($id);
             }
