@@ -119,7 +119,8 @@ $config = [
             'baseUrl' => '/',
             'scriptUrl' => '/',     
             'rules' => [
-                'download' => 'site/download'
+                'download' => 'site/download',
+                'v/<v:\w+>/?' => 'site/index',
             ],
         ],
     ],

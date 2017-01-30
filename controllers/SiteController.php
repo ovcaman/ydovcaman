@@ -47,7 +47,7 @@ class SiteController extends Controller
             ],
         ];
     }
-    
+
     /**
      * Vypnutie CSRF validacie pre konkretne akcie
      */
@@ -70,6 +70,10 @@ class SiteController extends Controller
         $filename = null;
         
         if ($v != null) {
+            if (substr($_SERVER['REQUEST_URI'], 0, 3) != "/v/") {
+                header("Location: /v/{$v}/?format=" . $format);
+                exit;
+            }
             $data = Video::find()->where(['id' => $v, 'language' => LANGUAGE])->one();
             $download->url = "https://www.youtube.com/watch?v=".$v;
             if ($data == NULL) {
@@ -114,7 +118,7 @@ class SiteController extends Controller
             $download->format = $_POST['Download']['format'];
             $download->video_id = $id;
             $download_link = $download->downloadVideo();
-            return $this->redirect('/?v=' . $id . '&format=' . $_POST['Download']['format'],302);
+            return $this->redirect('/v/' . $id . '/?format=' . $_POST['Download']['format'],302);
         }
         return $this->render('index', ['download' => $download, 'video' => $video, 'error' => $error, 'more' => $more, 'filename' => $filename]);
     }
