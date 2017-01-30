@@ -142,7 +142,10 @@ class SiteController extends Controller
 
     public function actionSitemap()
     {
-        $videos = Video::find()->select('video.*, COUNT(*) AS `download_count`')->from('`video` LEFT JOIN `download` ON `video`.`id` = `video_id`')->where(['language' => LANGUAGE, 'ban' => 0, 'dmca' => 0])->groupBy('`video`.`id`')->orderBy('`download_count` DESC')->limit(15000)->all();
+        $videos = [];
+        if (!IS_FINAL_DOMAIN) {
+            $videos = Video::find()->select('video.*, COUNT(*) AS `download_count`')->from('`video` LEFT JOIN `download` ON `video`.`id` = `video_id`')->where(['language' => LANGUAGE, 'ban' => 0, 'dmca' => 0])->groupBy('`video`.`id`')->orderBy('`download_count` DESC')->limit(15000)->all();
+        }
         return $this->render('sitemap', ['videos' => $videos]);
     }
 
@@ -153,12 +156,15 @@ class SiteController extends Controller
         Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
         $per_page = 10000;
         $offset = 0;
+        $pages = 1;
         $videos = [];
-        if ($page != null) {
+        if ($page != null && !IS_FINAL_DOMAIN) {
             $videos = Video::find()->select('video.*, COUNT(*) AS `download_count`')->from('`video` LEFT JOIN `download` ON `video`.`id` = `video_id`')->where(['language' => LANGUAGE, 'ban' => 0, 'dmca' => 0])->groupBy('`video`.`id`')->orderBy('`download_count` DESC')->limit($per_page)->offset(($page - 1) * $per_page)->all();
         }
-        $total = Video::find()->where(['language' => LANGUAGE, 'ban' => 0, 'dmca' => 0])->count();
-        $pages = ceil($total / $per_page);
+        if (!IS_FINAL_DOMAIN) {
+            $total = Video::find()->where(['language' => LANGUAGE, 'ban' => 0, 'dmca' => 0])->count();
+            $pages = ceil($total / $per_page);
+        }
         echo trim($this->renderPartial('sitemapXml', ['videos' => $videos, 'pages' => $pages, 'page' => $page]));
         return "";
     }
