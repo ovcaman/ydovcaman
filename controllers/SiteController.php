@@ -93,7 +93,11 @@ class SiteController extends Controller
                 $video = $data;
             }
             else {
-                return $this->redirect('/',302);                
+                return $this->redirect('/', 302);                
+            }
+            if ($video->ban == 1)
+            {
+                return $this->redirect( "/", 302);
             }
             if (isset($format) && in_array($format, ['mp3', 'mp4'])) {
                 $download->format = $format;

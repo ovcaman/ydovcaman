@@ -13,6 +13,13 @@ if ($video->title == null) {
 else {
     $this->title = $lang['download'][LANGUAGE] . " \"" . $video->title . "\"";
     $this->registerMetaTag(["name" => "description", "content" => str_replace("{title}", $video->title, $lang['video_meta_description'][LANGUAGE])]);
+    if (IS_FINAL_DOMAIN) {
+        $this->registerMetaTag(["name" => "robots", "content" => 'noindex']);
+    }
+    if ($video->dmca == 1) 
+    {
+        $this->registerMetaTag(["name" => "robots", "content" => 'noindex']);
+    }
 }
 ?>
 <div id="url_form">
