@@ -142,7 +142,7 @@ class SiteController extends Controller
 
     public function actionSitemap()
     {
-        $videos = Video::find()->select('video.*, COUNT(*) AS `download_count`')->from('`video` LEFT JOIN `download` ON `video`.`id` = `video_id`')->where(['language' => LANGUAGE])->groupBy('`video`.`id`')->orderBy('`download_count` DESC')->limit(15000)->all();
+        $videos = Video::find()->select('video.*, COUNT(*) AS `download_count`')->from('`video` LEFT JOIN `download` ON `video`.`id` = `video_id`')->where(['language' => LANGUAGE, 'ban' => 0, 'dmca' => 0])->groupBy('`video`.`id`')->orderBy('`download_count` DESC')->limit(15000)->all();
         return $this->render('sitemap', ['videos' => $videos]);
     }
 
@@ -154,9 +154,9 @@ class SiteController extends Controller
         $offset = 0;
         $videos = [];
         if ($page != null) {
-            $videos = Video::find()->select('video.*, COUNT(*) AS `download_count`')->from('`video` LEFT JOIN `download` ON `video`.`id` = `video_id`')->where(['language' => LANGUAGE])->groupBy('`video`.`id`')->orderBy('`download_count` DESC')->limit($per_page)->offset(($page - 1) * $per_page)->all();
+            $videos = Video::find()->select('video.*, COUNT(*) AS `download_count`')->from('`video` LEFT JOIN `download` ON `video`.`id` = `video_id`')->where(['language' => LANGUAGE, 'ban' => 0, 'dmca' => 0])->groupBy('`video`.`id`')->orderBy('`download_count` DESC')->limit($per_page)->offset(($page - 1) * $per_page)->all();
         }
-        $total = Video::find()->where(['language' => LANGUAGE])->count();
+        $total = Video::find()->where(['language' => LANGUAGE, 'ban' => 0, 'dmca' => 0])->count();
         $pages = ceil($total / $per_page);
         echo trim($this->renderPartial('sitemapXml', ['videos' => $videos, 'pages' => $pages, 'page' => $page]));
         return "";
