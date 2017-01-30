@@ -71,7 +71,12 @@ class Download extends \yii\db\ActiveRecord
                 return $session['downloads'][$this->format][$this->video_id];
             }
             $proxy = "";
-            $video = Video::find()->where(['id' => $this->video_id, 'language' => LANGUAGE])->one();
+            $lang = LANGUAGE;
+            if (isset($_POST['language']))
+            {
+                $lang = $_POST['language'];
+            }
+            $video = Video::find()->where(['id' => $this->video_id, 'language' => $lang])->one();
             if (!$video) {
                 return false;
             }
