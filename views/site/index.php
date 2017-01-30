@@ -22,6 +22,7 @@ else {
     <div class="video-container">
       <div id="ytplayer"></div> 
     </div>
+    <div class="clearfix"></div>
     <br />                
     <?php } ?>
 
