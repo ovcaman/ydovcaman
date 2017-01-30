@@ -147,7 +147,7 @@ function onYouTubePlayerAPIReady() {
 ?>
 
   <div style="max-width:970px;margin:auto;">
-      <?= str_replace("{title}", $video->title, $lang['landing_help'][LANGUAGE]) ?>
+      <?= str_replace("{title}", $video->title, $lang['video_help'][LANGUAGE]) ?>
   </div>
   <div style="width:300px;position:relative;margin:25px auto 0 auto;border:10px solid #ffffff;border-radius:5px;box-shadow:0 0 5px #aaa;" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">
       <meta itemprop="thumbnailURL" content="http://i.ytimg.com/vi/<?= $video->id ?>/mqdefault.jpg" />
