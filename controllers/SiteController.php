@@ -149,7 +149,7 @@ class SiteController extends Controller
     public function actionSitemapXml($page = null)
     {   
         Yii::$app->response->headers->add('Content-Type', 'text/xml; charset=utf-8');
-        Yii::$app->response->format = \yii\web\Response::FORMAT_XML;
+        Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
         $per_page = 10000;
         $offset = 0;
         $videos = [];
