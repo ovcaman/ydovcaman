@@ -81,7 +81,7 @@ class SiteController extends Controller
             }
             $data = Video::find()->where(['id' => $v, 'language' => LANGUAGE])->one();
             $download->url = "https://www.youtube.com/watch?v=".$v;
-            if ($data == NULL) {
+            if (!$data) {
                 $data = $video->loadInfo($v);
             }
             if ($data) {

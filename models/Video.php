@@ -97,6 +97,7 @@ class Video extends \yii\db\ActiveRecord
                     $this->language = $_POST['language'];
                 }
                 $this->save();
+                return $this;
             }
             else {
                 return false;
