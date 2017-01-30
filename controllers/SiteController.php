@@ -47,6 +47,19 @@ class SiteController extends Controller
             ],
         ];
     }
+    
+    /**
+     * Vypnutie CSRF validacie pre konkretne akcie
+     */
+    public function beforeAction($action)
+    {            
+        if ($action->id == 'index') {
+            $this->enableCsrfValidation = false;
+        }
+
+        return parent::beforeAction($action);
+    }
+
 
     public function actionIndex($v = null, $format = null)
     {
