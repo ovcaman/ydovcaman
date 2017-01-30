@@ -75,6 +75,30 @@ class SiteController extends Controller
         }
         
         
+        if ($v != null) {
+            if (substr($_SERVER['REQUEST_URI'], 0, 3) != "/v/") {
+                return $this->redirect( "/v/{$v}/?format=" . $format);
+            }
+            $data = Video::find()->where(['id' => $v, 'language' => LANGUAGE])->one();
+            $download->url = "https://www.youtube.com/watch?v=".$v;
+            if ($data == NULL) {
+                $data = $video->loadInfo($v);
+            }
+            if ($data) {
+                $video = $data;
+            }
+            else {
+                return $this->redirect('/',302);                
+            }
+            if (isset($format) && in_array($format, ['mp3', 'mp4'])) {
+                $download->format = $format;
+                $session = Yii::$app->session;
+                if (isset($session['downloads'][$format][$v])) {
+                    $download->video_id = $v;
+                    $filename = $download->downloadVideo();
+                }
+            }
+        }
         if (isset($_POST['Download']['url'], $_POST['Download']['format']) && in_array($_POST['Download']['format'], ['mp3', 'mp4'])) {
             $id = explode("youtube.com/watch?v=", $_POST['Download']['url']);
             if (count($id) == 2) {
@@ -100,30 +124,6 @@ class SiteController extends Controller
             $download->video_id = $id;
             $download_link = $download->downloadVideo();
             return $this->redirect('/v/' . $id . '/?format=' . $_POST['Download']['format'],302);
-        }
-        if ($v != null) {
-            if (substr($_SERVER['REQUEST_URI'], 0, 3) != "/v/") {
-                return $this->redirect( "/v/{$v}/?format=" . $format);
-            }
-            $data = Video::find()->where(['id' => $v, 'language' => LANGUAGE])->one();
-            $download->url = "https://www.youtube.com/watch?v=".$v;
-            if ($data == NULL) {
-                $data = $video->loadInfo($v);
-            }
-            if ($data) {
-                $video = $data;
-            }
-            else {
-                return $this->redirect('/',302);                
-            }
-            if (isset($format) && in_array($format, ['mp3', 'mp4'])) {
-                $download->format = $format;
-                $session = Yii::$app->session;
-                if (isset($session['downloads'][$format][$v])) {
-                    $download->video_id = $v;
-                    $filename = $download->downloadVideo();
-                }
-            }
         }
         return $this->render('index', ['download' => $download, 'video' => $video, 'error' => $error, 'more' => $more, 'filename' => $filename]);
     }
