@@ -120,7 +120,7 @@ $config = [
             'scriptUrl' => '/',     
             'rules' => [
                 'download' => 'site/download',
-                'v/<v:\w+>/?' => 'site/index',
+                'v/<v:[a-zA-Z0-9_-]+>/?' => 'site/index',
             ],
         ],
     ],

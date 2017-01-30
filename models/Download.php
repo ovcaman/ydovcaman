@@ -33,7 +33,7 @@ class Download extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['video_id', 'ip', 'format'], 'required'],
+            [['video_id', 'ip', 'format', 'url'], 'required'],
             [['timestamp'], 'safe'],
             [['video_id'], 'string', 'max' => 11],
             [['ip'], 'string', 'max' => 64],

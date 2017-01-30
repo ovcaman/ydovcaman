@@ -61,18 +61,22 @@ class SiteController extends Controller
     }
 
 
-    public function actionIndex($v = null, $format = null)
+    public function actionIndex($v = null, $format = null, $setlang = null)
     {
         $download = new Download();
         $video = new Video();
         $error = "";
         $more = [];
         $filename = null;
+
+        if ($setlang != null)
+        {
+            return $this->redirect("/" . ($v == null ? '' : 'v/' . $v . '/') . ($format == null ? '' : '?format=' . $format),301);
+        }
         
         if ($v != null) {
             if (substr($_SERVER['REQUEST_URI'], 0, 3) != "/v/") {
-                header("Location: /v/{$v}/?format=" . $format);
-                exit;
+                return $this->redirect( "/v/{$v}/?format=" . $format);
             }
             $data = Video::find()->where(['id' => $v, 'language' => LANGUAGE])->one();
             $download->url = "https://www.youtube.com/watch?v=".$v;
