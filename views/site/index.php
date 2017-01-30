@@ -44,6 +44,7 @@ else {
                 <div class="col-md-3 col-sm-3 col-xs-7">
                     <?= $form->field($download, 'format', ['template' => '{label}{input}{error}'])->dropDownList(['mp3' => 'mp3 (audio)', 'mp4' => 'mp4 (audio + video)'], ['prompt' => ''])->label("Format:") ?>
                 </div>
+                <?= Html::hiddenInput('language', LANGUAGE); ?>
                 <div class="col-md-2 col-sm-2 col-xs-5">
                     <div class="form-group">
                         <label class="control-label">&nbsp;</label>
@@ -51,7 +52,7 @@ else {
                     </div>
                 </div>
                 <?php if ($filename) {?>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12" style="padding:5px;">
                         <script type='text/javascript'><!--// <![CDATA[
                             OA_show(<?= IS_FINAL_DOMAIN ? 9 : ['sk' => 5, 'cz' => 4, 'en' => 6][LANGUAGE] ?>);
                         // ]]> -->

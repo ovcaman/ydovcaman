@@ -91,6 +91,9 @@ class Video extends \yii\db\ActiveRecord
                 $this->ban = 0;
                 $this->dmca = 0;
                 $this->language = LANGUAGE;
+                if (isset($_POST['language']) && in_array($_POST['language'], ['cz', 'sk', 'en'])) {
+                    $this->language = $_POST['language'];
+                }
                 $this->save();
             }
             else {

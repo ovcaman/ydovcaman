@@ -75,12 +75,22 @@ class Download extends \yii\db\ActiveRecord
             if (!$video) {
                 return false;
             }
+            $filename = $video->id . "-" . MyString::strToURL($video->title);
 
             $this->ip = $_SERVER['REMOTE_ADDR'];
+            $this->url = "treba_cosi";
             $this->save();
 
+            if (isset($_POST['Download']) && file_exists($path.$filename.".".$this->format)) {
+                $_SESSION['downloads'][$this->format][$this->video_id] = $filename."." . $this->format;
+                return $filename . "." . $this->format;
+            }
+            if (isset($_POST['Download']) && file_exists($path.$filename.".mkv")) {
+                $_SESSION['downloads'][$this->format][$this->video_id] = $filename.".mkv";
+                return $filename . ".mkv";
+            }
+
             if ($video->proxy) $proxy = " --proxy 188.166.44.11:9999";
-            $filename = $video->id . "-" . MyString::strToURL($video->title);
             $unix = "";
             if (YII_ENV != "dev") $unix="LC_ALL=en_US.UTF-8 ";
             $err = 1;
