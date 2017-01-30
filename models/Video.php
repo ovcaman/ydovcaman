@@ -21,6 +21,8 @@ use Yii;
  */
 class Video extends \yii\db\ActiveRecord
 {
+    var $download_count;
+
     /**
      * @inheritdoc
      */

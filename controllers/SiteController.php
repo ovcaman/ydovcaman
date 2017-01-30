@@ -130,9 +130,22 @@ class SiteController extends Controller
 
     public function actionSitemap()
     {
-        $videos = Video::find()->select('*, COUNT(*) AS `download_count`')->from('`video` JOIN `download` ON `video`.`id` = `video_id`')->groupBy('video_id')->orderBy('COUNT(*) DESC')->all();
-        var_dump($videos);
-        exit;
-        return $this->render('sitemap', $videos);
+        $videos = Video::find()->select('*, video_id AS id, COUNT(*) AS `download_count`')->from('`video` JOIN `download` ON `video`.`id` = `video_id`')->where(['language' => LANGUAGE])->groupBy('video_id')->orderBy('`download_count` DESC')->all();
+        return $this->render('sitemap', ['videos' => $videos]);
+    }
+
+    public function actionStahovanieZYoutube()
+    {
+        return $this->render('stahovanieZYoutube');
+    }
+
+    public function actionStahovaniZYoutube()
+    {
+        return $this->render('stahovaniZYoutube');
+    }
+
+    public function actionDownloadVideoFromYoutube()
+    {
+        return $this->render('downloadVideoFromYoutube');
     }
 }
