@@ -51,13 +51,17 @@ else {
                     </div>
                 </div>
                 <?php if ($filename) {?>
-                    <a href="/tmp/<?= $filename ?>" class="btn btn-success btn-lg" style="width:100%;"><i class="glyphicon glyphicon-save"></i> Download: <?= $filename ?></a>
+                    <div class="col-sm-12">
+                        <script type='text/javascript'><!--// <![CDATA[
+                            OA_show(<?= IS_FINAL_DOMAIN ? 9 : ['sk' => 5, 'cz' => 4, 'en' => 6][LANGUAGE] ?>);
+                        // ]]> -->
+                        </script>
+
+                        <a href="/tmp/<?= $filename ?>" class="btn btn-success btn-lg" style="width:100%;"><i class="glyphicon glyphicon-save"></i> Download: <?= $filename ?></a>
+                    </div>
+
                 <?php }?>
 
-                <script type='text/javascript'><!--// <![CDATA[
-                    OA_show(<?= IS_FINAL_DOMAIN ? 9 : ['sk' => 5, 'cz' => 4, 'en' => 6][LANGUAGE] ?>);
-                // ]]> -->
-                </script>
             </div>
         </div>
         <?php
