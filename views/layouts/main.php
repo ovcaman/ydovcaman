@@ -24,6 +24,27 @@ if (YII_ENV != 'dev') $this->registerJs("
   ga('create', 'UA-68535642-1', 'auto');
   ga('send', 'pageview');
 ");
+$this->registerJs('
+  function liked() {
+      FB.Event.subscribe("edge.create", function() {
+          setCookie("FBlike", "1", 365);
+          $("body").removeClass("like_popup");
+      });
+      FB.Event.subscribe("edge.remove", function() {
+          setCookie("FBlike", "0", 365);
+      });
+  }
+  setTimeout(liked, 1000);
+', \yii\web\View::POS_END);
+
+if (!isset($_SESSION['know']) && (!isset($_SERVER['HTTP_USER_AGENT']) || !preg_match('/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT']))) {
+    $this->registerJs("
+        $(document).ready(function(){
+            $('body').addClass('popup');
+        });
+    ", \yii\web\View::POS_END);
+    $_SESSION['know'] = 1;
+}
 
 
 ?>
@@ -57,18 +78,6 @@ if (YII_ENV != 'dev') $this->registerJs("
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
-function liked() {
-    FB.Event.subscribe('edge.create', function() {
-        setCookie("FBlike", "1", 365);
-        $("body").removeClass("like_popup");
-    });
-    FB.Event.subscribe('edge.remove', function() {
-        setCookie("FBlike", "0", 365);
-    });
-}
-
-setTimeout(liked, 1000);
-
 </script>
 
 <?php $this->beginBody() ?>
@@ -86,8 +95,20 @@ setTimeout(liked, 1000);
     <img src="/layout/arrow.png?v=1" style="position:absolute;top:33px;margin-left:80px;">
   </div>
   <br /><br />
-  <i class="fa fa-times-circle close"></i>
+  <i class="fa fa-times-circle close" onclick="$('#like_popup').hide();$('body').removeClass('like_popup');"></i>
   </td></tr></table>
+</div>
+
+
+<div id="popup">  
+  <table>
+    <tr>
+      <td>
+        <?= $lang['didYouKnow'][LANGUAGE] ?>
+        <i class="fa fa-times-circle close" onclick="$('body').removeClass('popup');"></i>
+      </td>
+    </tr>
+  </table>
 </div>
 
 <div id="loader">

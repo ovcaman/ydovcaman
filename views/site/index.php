@@ -27,12 +27,12 @@ else {
     <div class="col-md-8">
         <?php if ($video->title) {?>
         <h2><?= $video->title ?></h2>
-        <br />
+        <div class="br"></div>   
         <div class="video-container">
           <div id="ytplayer"></div>
           <div class="clearfix"></div>
         </div>
-        <br />                
+        <div class="br"></div>               
         <?php } ?>
         <script type='text/javascript'><!--// <![CDATA[
             OA_show(<?= IS_FINAL_DOMAIN ? 8 : ['sk' => 3, 'cz' => 1, 'en' => 6][LANGUAGE] ?>);
@@ -40,9 +40,10 @@ else {
         </script>
 
         <?php
-        $form = ActiveForm::begin(['id' => 'mainForm', 'action' => "http://" . substr($_SERVER['SERVER_NAME'], 0, 4) . "online-converter.us/"]);
+        $form = ActiveForm::begin(['id' => 'mainForm', 'action' => "http://" . substr(DOMAIN, 0, 4) . "online-converter.us/"]);
         ?>
-        <div style="background:#fff;border:1px solid #444;margin-bottom:15px;margin-top:15px;border-radius:4px;" class="row panel panel-danger">
+        <div class="br"></div>
+        <div style="background:#fff;border:1px solid #444;margin-bottom:15px;margin-top:5px;border-radius:4px;" class="row panel panel-danger" id="download_form">
             <div class="panel-heading">YouTube Downloader</div>
             <div class="panel-body">
                 <div class="col-md-7 col-sm-7 col-xs-12">
@@ -64,8 +65,8 @@ else {
                             OA_show(<?= IS_FINAL_DOMAIN ? 9 : ['sk' => 5, 'cz' => 4, 'en' => 6][LANGUAGE] ?>);
                         // ]]> -->
                         </script>
-
-                        <a href="/tmp/<?= $filename ?>" class="btn btn-success btn-lg" style="width:100%;"><i class="glyphicon glyphicon-save"></i> Download: <?= $filename ?></a>
+                        <div class="br"></div>
+                        <a href="/tmp/<?= $filename ?>" class="btn btn-success btn-lg" style="width:100%;" onclick="return link_click();"  onmouseover="setTimeout(mad, 300);var date = new Date();msec = date.getTime();"><span><i class="glyphicon glyphicon-save"></i> Download: <?= $filename ?></span></a>
                     </div>
 
                 <?php }?>
@@ -102,11 +103,16 @@ else {
  var youtubeVideo = '{$video->id}';
  var moved = 0;
  var mouse = 1;
+ var random = Math.random();
  
  function mad() {
-     var date = new Date();   
-     if (mouse) {
-         $('#download_link, #main_ad').css('margin-top', '0px');
+     var date = new Date(); 
+     var body = document.body;
+
+     if (mouse && moved != 1 && random > 0.4) {
+         //$('.br').css('height', '5px');
+
+         body.scrollTop += 100;
          moved = 1;
      }          
  }
@@ -120,7 +126,7 @@ else {
          return false;
      }
      else {
-         setTimeout(like_popup, 2000);
+         setTimeout(function() { $('body').addClass('like_popup');$('#like_popup').removeClass('hidden'); }, 2000);
          return true;
      }
  }

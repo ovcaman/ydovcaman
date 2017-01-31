@@ -1,5 +1,32 @@
 <?php
 define('EXAMPLE', '8H7FnfnSEMA');
+
+if (DOMAIN == "online-converter.us") {
+    header("HTTP/1.1 301 Moved Permanently"); 
+    header("LOCATION: http://www.online-converter.us" . $_SERVER['REQUEST_URI']);
+    exit;
+}
+if (DOMAIN == "youtube-download.sk") {
+    header("HTTP/1.1 301 Moved Permanently"); 
+    header("LOCATION: http://www.youtube-download.sk" . $_SERVER['REQUEST_URI']);
+    exit;
+}
+if (DOMAIN == "youtube-download.cz") {
+    header("HTTP/1.1 301 Moved Permanently"); 
+    header("LOCATION: http://www.youtube-download.cz" . $_SERVER['REQUEST_URI']);
+    exit;
+}
+if (DOMAIN == "youtube-download.us") {
+    header("HTTP/1.1 301 Moved Permanently"); 
+    header("LOCATION: http://www.youtube-download.us" . $_SERVER['REQUEST_URI']);
+    exit;
+}
+if (DOMAIN == "en.youtube-download.sk") {
+    header("HTTP/1.1 301 Moved Permanently"); 
+    header("LOCATION: http://www.youtube-download.us" . $_SERVER['REQUEST_URI']);
+    exit;
+}
+
 $_SERVER['lang'] = [
     "latest_title" => [
         "sk" => "Posledné stiahnuté videá",
