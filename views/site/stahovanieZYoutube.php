@@ -13,9 +13,9 @@ $this->registerMetaTag(["name" => "keywords", "content" => "sťahovanie videa z 
     <p>Najrýchlejší spôsob sťahovania je dopísať <strong>-x</strong> do adresy videa.</p>
     <p>
         Takže ak chcete stiahnuť video: <br />
-        <a href="https://www.youtube.com/watch?v=WL6uAM3GuKQ">https://www.youtube.com/watch?v=WL6uAM3GuKQ<a><br />
+        <a href="https://www.youtube.com/watch?v=<?= EXAMPLE ?>">https://www.youtube.com/watch?v=<?= EXAMPLE ?><a><br />
         stačí adresu prepísať na: <br />
-        <a href="https://www.youtube-x.com/watch?v=WL6uAM3GuKQ">https://www.youtube<strong class="red">-x</strong>.com/watch?v=WL6uAM3GuKQ</a>  
+        <a href="https://www.youtube-x.com/watch?v=<?= EXAMPLE ?>">https://www.youtube<strong class="red">-x</strong>.com/watch?v=<?= EXAMPLE ?></a>  
     </p>
     <p>Následne budete presmerovaní na downloader, kde si vyberiete požadovaný formát (MP3/MP4). Po potvrdení bude vygenerovaná adresa na stiahnutie videa.</p>
     <h2>Použite online youtube downloader</h2>

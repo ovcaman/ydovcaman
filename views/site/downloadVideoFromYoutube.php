@@ -13,9 +13,9 @@ $this->registerMetaTag(["name" => "keywords", "content" => "download videos from
     <p>The fastest way is insert <strong>-x</strong> into video URL.</p>
     <p>
         So, if you want to download video: <br />
-        <a href="https://www.youtube.com/watch?v=WL6uAM3GuKQ">https://www.youtube.com/watch?v=WL6uAM3GuKQ<a><br />
+        <a href="https://www.youtube.com/watch?v=<?= EXAMPLE ?>">https://www.youtube.com/watch?v=<?= EXAMPLE ?><a><br />
         just edit it to this format: <br />
-        <a href="https://www.youtube-x.com/watch?v=WL6uAM3GuKQ">https://www.youtube<strong class="red">-x</strong>.com/watch?v=WL6uAM3GuKQ</a>  
+        <a href="https://www.youtube-x.com/watch?v=<?= EXAMPLE ?>">https://www.youtube<strong class="red">-x</strong>.com/watch?v=<?= EXAMPLE ?></a>  
     </p>
     <p>You will be redirected to downloader, where you can choose format of downloaded video/audio (MP4/MP3). After submit you will get download link.</p>
     <h2>Using online video downloader</h2>

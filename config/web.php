@@ -1,5 +1,5 @@
 <?php
-
+define('EXAMPLE', '8H7FnfnSEMA');
 $_SERVER['lang'] = [
     "latest_title" => [
         "sk" => "Posledné stiahnuté videá",
@@ -33,11 +33,11 @@ $_SERVER['lang'] = [
     ],
     "didYouKnow" => [
         "sk" => 'Vedeli ste, že video z youtube sa dá stiahnúť<br />doplnením <span class="red">-x</span> do adresy?<br /><br />
-                <div style="font-size:25px;">https://www.youtube<span class="red">-x</span>.com/watch?v=WL6uAM3GuKQ</div>',
+                <div style="font-size:25px;">https://www.youtube<span class="red">-x</span>.com/watch?v='.EXAMPLE.'</div>',
         "cz" => 'Vědeli ste, že video z youtube se dá stáhnout<br />doplnením <span class="red">-x</span> do adřesy?<br /><br />
-                <div style="font-size:25px;">https://www.youtube<span class="red">-x</span>.com/watch?v=WL6uAM3GuKQ</div>',
+                <div style="font-size:25px;">https://www.youtube<span class="red">-x</span>.com/watch?v='.EXAMPLE.'</div>',
         "en" => 'Did you know, it is possible download video from youtube by<br />adding <span class="red">-x</span> in the video URL?<br /><br />
-                <div style="font-size:25px;">https://www.youtube<span class="red">-x</span>.com/watch?v=WL6uAM3GuKQ</div>'
+                <div style="font-size:25px;">https://www.youtube<span class="red">-x</span>.com/watch?v='.EXAMPLE.'</div>'
     ],
     "navod_url" => [
         "sk" => 'stahovanie-z-youtube',
