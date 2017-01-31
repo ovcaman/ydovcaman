@@ -183,4 +183,48 @@ class SiteController extends Controller
     {
         return $this->render('downloadVideoFromYoutube');
     }
+
+    public function actionGetDmca()
+    {
+        $this->getDmca('sk');
+        $this->getDmca('cz');
+        $this->getDmca('en');
+    }
+
+    public function getDmca($lang)
+    {
+        $api_url = [
+            'sk' => 'http://googledmca.info/api/find-domain-urls/?domain=youtube-download.sk',
+            'cz' => 'http://googledmca.info/api/find-domain-urls/?domain=youtube-download.cz',
+            'en' => 'http://googledmca.info/api/find-domain-urls/?domain=youtube-download.us',
+        ];
+        $urls = file_get_contents($api_url[$lang]);
+        $urls = json_decode($urls, true);
+        $ids = [];
+        foreach ($urls AS $url) {
+            preg_match_all("/\?v=([a-zA-Z0-9-_]+)/i", $url, $match);
+            if (isset($match[1][0])) {
+                $ids[] = $match[1][0];
+            }
+            elseif (!isset($match[1][0])) {
+                preg_match_all("/\/v\/([a-zA-Z0-9-_]+)/i", $url, $match);
+                if (isset($match[1][0])) {
+                    $ids[] = $match[1][0];
+                }
+                else {
+                    var_dump($url);
+                }
+            }
+            else {
+                var_dump($match[1][0]);
+            }
+        }
+        foreach ($ids AS $id) {
+            $video = Video::find()->where(['id' => $id, 'language' => $lang])->one();
+            if ($video) {
+                $video->dmca = 1;
+                $video->save();
+            }
+        }
+    }
 }
