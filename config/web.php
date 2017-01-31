@@ -135,6 +135,7 @@ $config = [
             'scriptUrl' => '/',     
             'rules' => [
                 'sitemap.xml' => 'site/sitemap-xml',
+                'robots.txt' => 'site/robots-txt',
                 '<action:[a-zA-Z0-9_-]+>/?' => 'site/<action>',
                 'download' => 'site/download',
                 'v/<v:[a-zA-Z0-9_-]+>/?' => 'site/index',

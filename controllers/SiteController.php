@@ -169,6 +169,15 @@ class SiteController extends Controller
         return "";
     }
 
+    public function actionRobotsTxt() {
+        $txt = "User-agent: *\n\rDisallow:\n\r\n\rUser-agent: Googlebot\n\r";
+        $banned = Video::find()->where(['OR', ['dmca' => 1], ['ban' => 1]])->asArray()->all();
+        foreach ($banned AS $video) {
+            $txt .= "Disallow: /v/" . $video->id . "/\r\n";
+        }
+        return $txt;
+    }
+
     public function actionStahovanieZYoutube()
     {
         return $this->render('stahovanieZYoutube');
