@@ -173,7 +173,7 @@ class SiteController extends Controller
         $txt = "User-agent: *\n\rDisallow:\n\r\n\rUser-agent: Googlebot\n\r";
         $banned = Video::find()->where(['OR', ['dmca' => 1], ['ban' => 1]])->asArray()->all();
         foreach ($banned AS $video) {
-            $txt .= "Disallow: /v/" . $video->id . "/\r\n";
+            $txt .= "Disallow: /v/" . $video['id'] . "/\r\n";
         }
         return $txt;
     }
