@@ -171,9 +171,14 @@ class SiteController extends Controller
 
     public function actionRobotsTxt() {
         $txt = "User-agent: * \r\nDisallow: \r\n\r\nUser-agent: Googlebot \r\n";
-        $banned = Video::find()->where(['OR', ['dmca' => 1], ['ban' => 1]])->andWhere(['language' => LANGUAGE])->asArray()->all();
-        foreach ($banned AS $video) {
-            $txt .= "Disallow: /v/" . $video['id'] . "/ \r\n";
+        if (IS_FINAL_DOMAIN) {
+            $txt .= "Disallow: /v/";
+        }
+        else {
+            $banned = Video::find()->where(['OR', ['dmca' => 1], ['ban' => 1]])->andWhere(['language' => LANGUAGE])->asArray()->all();
+            foreach ($banned AS $video) {
+                $txt .= "Disallow: /v/" . $video['id'] . "/ \r\n";
+            }
         }
         return $txt;
     }
