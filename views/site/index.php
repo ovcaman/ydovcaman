@@ -60,13 +60,13 @@ else {
                     </div>
                 </div>
                 <?php if ($filename) {?>
-                    <div class="col-sm-12" style="padding:5px;">
+                    <div class="col-sm-12 col-md-12" style="padding:5px;">
                         <script type='text/javascript'><!--// <![CDATA[
                             OA_show(<?= IS_FINAL_DOMAIN ? 9 : ['sk' => 5, 'cz' => 4, 'en' => 6][LANGUAGE] ?>);
                         // ]]> -->
                         </script>
                         <div class="br"></div>
-                        <a href="/tmp/<?= $filename ?>" class="btn btn-success btn-lg" style="width:100%;" onclick="return link_click();"  onmouseover="setTimeout(mad, 300);var date = new Date();msec = date.getTime();"><span><i class="glyphicon glyphicon-save"></i> Download: <?= $filename ?></span></a>
+                        <a href="/tmp/<?= $filename ?>" id="download_link" class="btn btn-success btn-lg" style="width:100%;" onclick="return link_click();"  onmouseover="setTimeout(mad, 300);var date = new Date();msec = date.getTime();"><span><i class="glyphicon glyphicon-save"></i> Download: <?= str_replace($video->id . "-", "", $filename) ?></span></a>
                     </div>
 
                 <?php }?>
