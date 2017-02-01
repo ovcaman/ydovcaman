@@ -10,7 +10,22 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
-$lang = $_SERVER['lang'];         
+$lang = $_SERVER['lang']; 
+if (LANGUAGE == 'sk')
+{
+  $ga_id = "UA-68535642-1";
+}        
+elseif (LANGUAGE == 'cz')
+{
+  $ga_id = "UA-68535642-4";
+}        
+elseif (LANGUAGE == 'en')
+{
+  $ga_id = "UA-68535642-5";
+  if (IS_FINAL_DOMAIN) {
+    $ga_id = "UA-68535642-6";
+  }
+}        
 
 AppAsset::register($this);
 $this->registerJsFile("/js/ads.js");
@@ -21,7 +36,7 @@ if (YII_ENV != 'dev') $this->registerJs("
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga')
 
-  ga('create', 'UA-68535642-1', 'auto');
+  ga('create', '{$ga_id}', 'auto');
   ga('send', 'pageview');
 
   function setCookie(cname, cvalue, exdays) {
