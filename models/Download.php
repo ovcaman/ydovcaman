@@ -94,7 +94,7 @@ class Download extends \yii\db\ActiveRecord
                 $_SESSION['downloads'][$this->format][$this->video_id] = $filename.".mkv";
                 return $filename . ".mkv";
             }
-            $proxy_addr = " --proxy 188.166.44.11:9999"
+            $proxy_addr = " --proxy 188.166.44.11:9999";
             if ($video->proxy) $proxy = $proxy_addr;
             $unix = "";
             if (YII_ENV != "dev") $unix="LC_ALL=en_US.UTF-8 ";
