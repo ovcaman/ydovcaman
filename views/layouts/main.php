@@ -23,19 +23,30 @@ if (YII_ENV != 'dev') $this->registerJs("
 
   ga('create', 'UA-68535642-1', 'auto');
   ga('send', 'pageview');
-");
-$this->registerJs('
-  function liked() {
-      FB.Event.subscribe("edge.create", function() {
-          setCookie("FBlike", "1", 365);
-          $("body").removeClass("like_popup");
-      });
-      FB.Event.subscribe("edge.remove", function() {
-          setCookie("FBlike", "0", 365);
-      });
+
+  function setCookie(cname, cvalue, exdays) {
+      var d = new Date();
+      var expires = '';
+      if (exdays != 'session') {
+          d.setTime(d.getTime() + (exdays*24*60*60*1000));
+          expires = 'expires='+d.toUTCString();
+      }
+      document.cookie = cname + '=' + cvalue + '; ' + expires;
   }
-  setTimeout(liked, 1000);
-', \yii\web\View::POS_END);
+");
+    $this->registerJs('
+      function liked() {
+          FB.Event.subscribe("edge.create", function() {
+              setCookie("FBlike", "1", 365);
+              $("body").removeClass("like_popup");
+          });
+          FB.Event.subscribe("edge.remove", function() {
+              setCookie("FBlike", "0", 365);
+          });
+      }
+      setTimeout(liked, 1000);
+
+    ', \yii\web\View::POS_END);
 
 if (!isset($_SESSION['know']) && (!isset($_SERVER['HTTP_USER_AGENT']) || !preg_match('/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT']))) {
     $this->registerJs("
@@ -86,18 +97,24 @@ if (!isset($_SESSION['know']) && (!isset($_SERVER['HTTP_USER_AGENT']) || !preg_m
         <?= $lang['adblock'][LANGUAGE] ?>
     </td></tr></table>
 </div>
+<?php
 
-<div id="like_popup" class="blackOpaque hidden">  
-  <table><tr><td>
-  Pomohla ti táto stránka?<br />Pomôž aj ty svojim lajkom!<br />
-  <div style="position:relative;">
-    <div class="fb-like" id="popup_like_button" data-href="https://www.facebook.com/youtube.download.sk" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
-    <img src="/layout/arrow.png?v=1" style="position:absolute;top:33px;margin-left:80px;">
-  </div>
-  <br /><br />
-  <i class="fa fa-times-circle close" onclick="$('#like_popup').hide();$('body').removeClass('like_popup');"></i>
-  </td></tr></table>
-</div>
+if (!isset($_COOKIE['FBlike']) || $_COOKIE['FBlike'] != 1) { ?>
+    <div id="like_popup" class="blackOpaque hidden">  
+      <table><tr><td>
+      Pomohla ti táto stránka?<br />Pomôž aj ty svojim lajkom!<br />
+      <div style="position:relative;">
+        <div class="fb-like" id="popup_like_button" data-href="https://www.facebook.com/youtube.download.sk" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
+        <img src="/layout/arrow.png?v=1" style="position:absolute;top:33px;margin-left:80px;">
+      </div>
+      <br /><br />
+      <i class="fa fa-times-circle close" onclick="$('#like_popup').addClass('hidden');$('body').removeClass('like_popup');"></i>
+      </td></tr></table>
+    </div>
+    <?php 
+}
+
+?>
 
 
 <div id="popup">  

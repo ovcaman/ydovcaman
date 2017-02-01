@@ -60,7 +60,7 @@ else {
                     </div>
                 </div>
                 <?php if ($filename) {?>
-                    <div class="col-sm-12 col-md-12" style="padding:5px;">
+                    <div class="col-xs-12" style="padding:5px;">
                         <script type='text/javascript'><!--// <![CDATA[
                             OA_show(<?= IS_FINAL_DOMAIN ? 9 : ['sk' => 5, 'cz' => 4, 'en' => 6][LANGUAGE] ?>);
                         // ]]> -->
@@ -120,13 +120,21 @@ else {
  function link_click() {
      var date = new Date();
      msec = date.getTime() - msec;
-     if (msec < 30 && moved == 0) {
+     if (msec < 30 && moved == 0 && random > 0.4) {
+         setTimeout(function() {
+             var body = document.body;     
+             body.scrollTop += 100;
+             moved = 1;
+         }, 800);
          msec = date.getTime();
-         setTimeout(mad, 10000);
+         //setTimeout(mad, 10000);
          return false;
      }
-     else {
+     else if ($('#like_popup').length > 0) {
          setTimeout(function() { $('body').addClass('like_popup');$('#like_popup').removeClass('hidden'); }, 2000);
+         return true;
+     }
+     else {
          return true;
      }
  }
