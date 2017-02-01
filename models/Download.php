@@ -94,18 +94,31 @@ class Download extends \yii\db\ActiveRecord
                 $_SESSION['downloads'][$this->format][$this->video_id] = $filename.".mkv";
                 return $filename . ".mkv";
             }
-
-            if ($video->proxy) $proxy = " --proxy 188.166.44.11:9999";
+            $proxy_addr = " --proxy 188.166.44.11:9999"
+            if ($video->proxy) $proxy = $proxy_addr;
             $unix = "";
             if (YII_ENV != "dev") $unix="LC_ALL=en_US.UTF-8 ";
             $err = 1;
-            if ($this->format == "mp4") {
-                //echo "{$unix}youtube-dl{$proxy} -f \"bestvideo[ext=mp4][height <= 720]+bestaudio[ext=m4a]/best[ext=mp4][height <= 720]/best[height <= 720]/best\" -o \"" . $path . "{$filename}.%(ext)s\" \"https://www.youtube.com/watch?v={$video->id}\"";
-                exec("{$unix}youtube-dl{$proxy} -f \"bestvideo[ext=mp4][height <= 720]+bestaudio[ext=m4a]/best[ext=mp4][height <= 720]/best[height <= 720]/best\" -o \"" . $path . "{$filename}.%(ext)s\" \"https://www.youtube.com/watch?v={$video->id}\"", $out, $err);
+            $double_check = 0;
+            while ($err == 1 && $double_check == 0) {
+                if ($this->format == "mp4") {
+                    //echo "{$unix}youtube-dl{$proxy} -f \"bestvideo[ext=mp4][height <= 720]+bestaudio[ext=m4a]/best[ext=mp4][height <= 720]/best[height <= 720]/best\" -o \"" . $path . "{$filename}.%(ext)s\" \"https://www.youtube.com/watch?v={$video->id}\"";
+                    exec("{$unix}youtube-dl{$proxy} -f \"bestvideo[ext=mp4][height <= 720]+bestaudio[ext=m4a]/best[ext=mp4][height <= 720]/best[height <= 720]/best\" -o \"" . $path . "{$filename}.%(ext)s\" \"https://www.youtube.com/watch?v={$video->id}\"", $out, $err);
+                }
+                elseif ($this->format == "mp3") {
+                    //echo "{$unix}youtube-dl{$proxy} -f bestaudio -x --audio-format mp3 -o \"" . Yii::getAlias('@webroot') . "/tmp/{$filename}.%(ext)s\" \"https://www.youtube.com/watch?v={$video->id}\"";
+                    exec("{$unix}youtube-dl{$proxy} -f bestaudio -x --audio-format mp3 -o \"" . $path . "{$filename}.%(ext)s\" \"https://www.youtube.com/watch?v={$video->id}\"", $out, $err);
+                }
+                if ($err == 1)
+                {
+                    $proxy = $proxy_addr;
+                    $double_check = 1;
+                }
             }
-            elseif ($this->format == "mp3") {
-                //echo "{$unix}youtube-dl{$proxy} -f bestaudio -x --audio-format mp3 -o \"" . Yii::getAlias('@webroot') . "/tmp/{$filename}.%(ext)s\" \"https://www.youtube.com/watch?v={$video->id}\"";
-                exec("{$unix}youtube-dl{$proxy} -f bestaudio -x --audio-format mp3 -o \"" . $path . "{$filename}.%(ext)s\" \"https://www.youtube.com/watch?v={$video->id}\"", $out, $err);
+            if ($err == 0 && $double_check == 1)
+            {
+                $video->proxy = 1;
+                $video->save();
             }
             if ($err == 0 && file_exists($path.$filename.".".$this->format)) {
                 $_SESSION['downloads'][$this->format][$this->video_id] = $filename.".".$this->format;
