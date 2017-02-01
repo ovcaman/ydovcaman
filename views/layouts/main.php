@@ -48,7 +48,7 @@ if (YII_ENV != 'dev') $this->registerJs("
 
     ', \yii\web\View::POS_END);
 
-if (!isset($_SESSION['know']) && (!isset($_SERVER['HTTP_USER_AGENT']) || !preg_match('/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT']))) {
+if (!isset($_SESSION['know']) && (!isset($_SERVER['HTTP_USER_AGENT']) || !preg_match('/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT'])) && !IS_FINAL_DOMAIN) {
     $this->registerJs("
         $(document).ready(function(){
             $('body').addClass('popup');
